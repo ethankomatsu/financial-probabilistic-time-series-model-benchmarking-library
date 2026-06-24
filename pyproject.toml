@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "finprobts-bench"
+version = "0.1.0"
+description = "Professional benchmark library for probabilistic financial time-series forecasting models."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+  { name = "FinProbTS contributors" }
+]
+dependencies = [
+  "matplotlib",
+  "numpy",
+  "pandas",
+  "pyyaml",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest",
+]
+metrics = [
+  "properscoring",
+  "scoringrules",
+]
+parquet = [
+  "pyarrow",
+]
+torch = [
+  "torch",
+]
+deep = [
+  "torch",
+  "properscoring",
+  "scoringrules",
+]
+
+[project.scripts]
+finprobts = "finprobts.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["finprobts*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

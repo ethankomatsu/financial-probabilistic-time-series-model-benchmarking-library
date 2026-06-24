@@ -1,0 +1,51 @@
+run:
+  run_id: crsp_deepvar
+  output_dir: outputs
+  seed: 2026
+
+dataset:
+  name: crsp
+  path: data/crsp/crsp_returns.parquet
+  format: long
+  date_column: date
+  asset_id_column: permno
+  target_column: ret
+  freq: B
+  validate_regular: false
+
+preprocessing:
+  value_kind: returns
+  price_to_log_return: false
+  missing_method: ffill
+  standardize: true
+
+split:
+  train_size: 0.6
+  val_size: 0.2
+
+task:
+  context_length: 96
+  prediction_length: 1
+  stride: 1
+
+model:
+  name: deepvar
+  params:
+    hidden_size: 64
+    num_layers: 2
+    rank: 5
+    embedding_dim: 4
+    learning_rate: 1.0e-3
+    batch_size: 64
+    max_epochs: 10
+    patience: 3
+    device: auto
+
+forecast:
+  num_samples: 100
+
+evaluation:
+  quantiles: [0.1, 0.5, 0.9]
+  coverage_levels: [0.5, 0.9]
+  var_alpha: 0.05
+  include_multivariate_scores: false

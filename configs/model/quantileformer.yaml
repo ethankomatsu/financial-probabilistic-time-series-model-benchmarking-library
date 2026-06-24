@@ -1,0 +1,15 @@
+model:
+  name: quantileformer
+  params:
+    quantiles: [0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95]
+    d_model: 64
+    n_heads: 4
+    num_layers: 2
+    dim_feedforward: 128
+    dropout: 0.1
+    learning_rate: 1.0e-3
+    batch_size: 64
+    max_epochs: 10
+    patience: 3
+    grad_clip: 1.0
+    device: auto

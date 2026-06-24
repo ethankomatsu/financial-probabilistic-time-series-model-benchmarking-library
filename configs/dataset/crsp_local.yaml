@@ -1,0 +1,15 @@
+dataset:
+  name: crsp
+  path: data/crsp/crsp_returns.parquet
+  format: long
+  date_column: date
+  asset_id_column: permno
+  target_column: ret
+  freq: B
+  validate_regular: false
+
+preprocessing:
+  value_kind: returns
+  price_to_log_return: false
+  missing_method: ffill
+  standardize: true

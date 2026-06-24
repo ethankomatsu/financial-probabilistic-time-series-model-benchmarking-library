@@ -216,3 +216,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Benchmark outputs, generated configs, and private/local data
+.DS_Store
+outputs/
+configs/generated/
+data/crsp/
+data/simulated/
+data/historical_stock_data/
+!data/example/
+!data/example/**
