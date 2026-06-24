@@ -2,7 +2,7 @@
 
 FinProbTS-Bench is a research-grade benchmarking library for probabilistic financial time series forecasting. It provides a common data contract, reproducible experiment runner, model registry, synthetic financial stress datasets, and evaluation stack for comparing probabilistic forecasting models on real CRSP-style panels and controlled simulated data.
 
-The design follows the blueprint in the project slides: split-safe preprocessing, train-only standardization, rolling windows, sample-based probabilistic outputs, finance-aware diagnostics, and CLI-driven runs similar in spirit to the Time-Series-Library workflow.
+The library is designed for empirical research workflows where model comparisons need to be repeatable, inspectable, and easy to extend. It emphasizes split-safe preprocessing, train-only standardization, rolling-window forecasting tasks, sample-based probabilistic outputs, finance-aware diagnostics, and CLI-driven experiment runs.
 
 ## Installation
 
@@ -101,14 +101,14 @@ finprobts generate-synthetic --case case1_garch --levels 1 --T 300 --n-firms 5 -
 
 ## Running Experiments
 
-Config-first workflow:
+Run from a YAML config:
 
 ```bash
 finprobts run --config configs/example_crypto_naive.yaml
 finprobts run --config configs/runs/crsp_deepvar.yaml
 ```
 
-Time-Series-Library-style flag workflow:
+Run directly from command-line flags:
 
 ```bash
 finprobts run \
@@ -160,9 +160,9 @@ finprobts evaluate --run-dir outputs/example_crypto_naive
 
 | Model | Status |
 | --- | --- |
-| DeepVAR 2019 | Native PyTorch adapter aligned with PyTorchTS/GluonTS DeepVAR and seeded by the old repo implementation |
+| DeepVAR 2019 | Native PyTorch adapter aligned with PyTorchTS/GluonTS DeepVAR |
 | TimeGrad 2021 | Native adapter targeting PyTorchTS TimeGrad architecture |
-| TimeMCL 2025 ICML | Native adapter based on official TimeMCL design notes |
+| TimeMCL 2025 ICML | Native adapter based on the published TimeMCL method and available reference implementation details |
 | TSFlow 2025 ICLR | Paper/repo-faithful native adapter with documented dependency/licensing deviations |
 | RATD 2024 NeurIPS | Native retrieval-augmented diffusion adapter based on official RATD |
 | QuantileFormer 2025 IJCAI | Paper-faithful native quantile Transformer; no official source code identified |
@@ -232,3 +232,26 @@ python -m pytest -q
 ## Current Test Status
 
 The test suite covers data loading, preprocessing, rolling windows, metrics, synthetic generation, CLI runs, and CPU smoke tests for native torch models.
+
+## References
+
+Model and method references:
+
+- David Salinas, Michael Bohlke-Schneider, Laurent Callot, Roberto Medico, and Jan Gasthaus. "High-Dimensional Multivariate Forecasting with Low-Rank Gaussian Copula Processes." NeurIPS 2019. https://arxiv.org/abs/1910.03002
+- Kashif Rasul, Calvin Seward, Ingmar Schuster, and Roland Vollgraf. "Autoregressive Denoising Diffusion Models for Multivariate Probabilistic Time Series Forecasting." ICML 2021. https://proceedings.mlr.press/v139/rasul21a.html
+- Adrien Cortes, Remi Rehm, and Victor Letzelter. "Winner-takes-all for Multivariate Probabilistic Time Series Forecasting." ICML 2025. https://proceedings.mlr.press/v267/cortes25b.html
+- Marcel Kollovieh, Marten Lienen, David Ludke, Leo Schwinn, and Stephan Gunnemann. "Flow Matching with Gaussian Process Priors for Probabilistic Time Series Forecasting." ICLR 2025. https://arxiv.org/abs/2410.03024
+- Jingwei Liu, Ling Yang, Hongyan Li, and Shenda Hong. "Retrieval-Augmented Diffusion Models for Time Series Forecasting." NeurIPS 2024. https://arxiv.org/abs/2410.18712
+- David Salinas, Valentin Flunkert, Jan Gasthaus, and Tim Januschowski. "DeepAR: Probabilistic Forecasting with Autoregressive Recurrent Networks." International Journal of Forecasting, 2020. https://arxiv.org/abs/1704.04110
+- QuantileFormer, IJCAI 2025. No official source code was identified during implementation; this repository's adapter is a paper-faithful native implementation.
+
+Software, benchmark, and evaluation references:
+
+- Time-Series-Library: https://github.com/thuml/Time-Series-Library
+- GluonTS: https://github.com/awslabs/gluonts
+- PyTorchTS: https://github.com/zalandoresearch/pytorch-ts
+- Official TimeMCL implementation: https://github.com/Victorletzelter/timeMCL
+- Official RATD implementation: https://github.com/stanliu96/RATD
+- TSFlow implementation reference: https://github.com/marcelkollovieh/TSFlow
+- scoringrules: https://github.com/frazane/scoringrules
+- properscoring: https://github.com/TheClimateCorporation/properscoring
