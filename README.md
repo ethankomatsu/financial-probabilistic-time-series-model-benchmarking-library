@@ -1,6 +1,6 @@
 # FinProbTS-Bench
 
-FinProbTS-Bench is a benchmarking library for probabilistic financial time series forecasting. It provides a common data contract, reproducible experiment runner, model registry, synthetic financial stress datasets, and evaluation stack for comparing probabilistic forecasting models on real CRSP-style panels and controlled simulated data.
+FinProbTS-Bench is a benchmarking library for probabilistic financial time series forecasting. It provides a common data contract, reproducible experiment runner, model registry, synthetic financial datasets, and evaluation stack for comparing probabilistic forecasting models on real CRSP-style panels and controlled simulated data.
 
 The library is designed for empirical research workflows where model comparisons need to be repeatable, inspectable, and easy to extend. It emphasizes split-safe preprocessing, train-only standardization, rolling-window forecasting tasks, sample-based probabilistic outputs, finance-aware diagnostics, and CLI-driven experiment runs.
 
